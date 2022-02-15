@@ -1,4 +1,4 @@
-import { config } from 'dotenv'; config({ path: 'src/.env' });
+import { config } from 'dotenv'; config();
 import { Client, Collection, ClientOptions } from 'discord.js';
 import { BaseCommand } from './BaseCommand';
 import { BaseLoader } from './BaseLoader';
