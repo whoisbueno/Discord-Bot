@@ -8,6 +8,7 @@ const options: ClientOptions = {
         'Guilds',
         'GuildMembers',
         'GuildMessages',
+        'MessageContent',
         'GuildPresences'
     ]
 };
