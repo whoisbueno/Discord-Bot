@@ -1,14 +1,14 @@
-import { config } from 'dotenv'; config();
+import { config } from 'dotenv'; config({ path: 'src/.env' });
 import { Client, Collection, ClientOptions } from 'discord.js';
 import { BaseCommand } from './BaseCommand';
 import { BaseLoader } from './BaseLoader';
 
 const options: ClientOptions = {
     intents: [
-        'GUILDS',
-        'GUILD_MEMBERS',
-        'GUILD_MESSAGES',
-        'GUILD_PRESENCES'
+        'Guilds',
+        'GuildMembers',
+        'GuildMessages',
+        'GuildPresences'
     ]
 };
 

@@ -1,11 +1,11 @@
-import { Message } from 'discord.js';
+import { ChannelType, Message } from 'discord.js';
 import { BaseClient } from '../structures/BaseClient';
 import { BaseCommand } from '../structures/BaseCommand';
 import { BaseEvent } from '../structures/BaseEvent';
 
 export default class MessageCreate extends BaseEvent {
     public async execute(client: BaseClient, message: Message): Promise<void> {
-        if (message.author.bot || message.channel.type == 'DM' || !message.content.startsWith(process.env.PREFIX as string)) return;
+        if (message.author.bot || message.channel.type == ChannelType.DM || !message.content.startsWith(process.env.PREFIX as string)) return;
 
         const args = message.content.slice(process.env.PREFIX?.length).trim().split(/ +/g);
         const command = args.shift()?.toLowerCase() as string;

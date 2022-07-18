@@ -1,4 +1,4 @@
-import { Client, Message } from 'discord.js';
+import { Client, Colors, Message } from 'discord.js';
 import { BaseCommand } from '../structures/BaseCommand';
 import { exec } from 'child_process';
 
@@ -18,12 +18,12 @@ export default class Terminal extends BaseCommand {
                 return message.channel.send({
                     embeds: [{
                         description: `Saída: \n\`\`\`\n${error.message}\`\`\``,
-                        color: '#000001'
+                        color: Colors.Gold
                     }]
-                }).catch(() => null);
+                });
             }
 
-            return message.channel.send({ content: `\`\`\`arm\n${stdout.length !== 0 ? stdout : 'Ação concluída!'}\n${stderr}\`\`\``, }).catch(() => null);
+            return message.channel.send({ content: `\`\`\`arm\n${stdout.length !== 0 ? stdout : 'Ação concluída!'}\n${stderr}\`\`\``, });
         });
     }
 }

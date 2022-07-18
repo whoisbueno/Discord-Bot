@@ -8,15 +8,15 @@
     "start": "npx ts-node-dev --transpile-only src/index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vizarthy#1273 (317476980855537666) | https://github.com/Vizarthy ",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^17.0.41",
+    "@types/node": "^18.0.6",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.7.3"
+    "typescript": "^4.7.4"
   },
   "dependencies": {
-    "discord.js": "^13.8.0",
+    "discord.js": "^14.0.1",
     "dotenv": "^16.0.1"
   }
 }

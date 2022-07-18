@@ -1,4 +1,4 @@
-import { Client, Message } from 'discord.js';
+import { Client, Colors, Message } from 'discord.js';
 import { BaseCommand } from '../structures/BaseCommand';
 import { inspect } from 'util';
 import { writeFileSync, unlinkSync } from 'fs';
@@ -26,13 +26,13 @@ export default class Evaluate extends BaseCommand {
                             { name: 'Entrada:', value: `\`\`\`js\n${code}\`\`\`` },
                             { name: 'Saída:', value: `\`\`\`js\n${evaluated}\`\`\`` }
                         ],
-                        color: '#000001'
+                        color: Colors.Gold
                     }]
-                }).catch(() => null);
+                });
                 return;
             } else {
                 writeFileSync('eval.js', evaluated);
-                await message.channel.send({ files: ['eval.js'] }).catch(() => null);
+                await message.channel.send({ files: ['eval.js'] });
                 unlinkSync('eval.js');
                 return;
             }
