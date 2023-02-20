@@ -1,22 +1,24 @@
 {
-  "name": "terminal-bot",
+  "name": "music-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx ts-node-dev --transpile-only src/index.ts"
   },
   "keywords": [],
-  "author": "Vizarthy#1273 (317476980855537666) | https://github.com/Vizarthy ",
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^18.0.6",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^4.7.4"
-  },
   "dependencies": {
-    "discord.js": "^14.0.3",
-    "dotenv": "^16.0.1"
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "erela.js": "^2.4.0",
+    "lyrics-finder": "^21.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.5"
   }
 }

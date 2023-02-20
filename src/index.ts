@@ -1,6 +1,3 @@
-import { BaseClient } from './structures/BaseClient';
-new BaseClient().connect();
+import('../src/structures/BaseClient').then(client => new client.BaseClient().connect());
 
-process.on('unhandledRejection', data => {
-    console.log(data);
-});
+process.on('unhandledRejection', error => { console.log(error); });

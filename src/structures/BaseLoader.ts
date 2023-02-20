@@ -1,27 +1,31 @@
-import { readdirSync } from 'fs';
 import { BaseClient } from './BaseClient';
+import { readdirSync } from 'fs';
 
 export class BaseLoader {
-    public static async loadEvents(client: BaseClient) {
-        const events = readdirSync('src/events');
-        for (const files of events) {
-            const eventName = files.split('.')[0];
-            const eventFile = await import(`../events/${files}`);
-            const Event = new eventFile.default(eventName);
+    public static async loadEvents(client: BaseClient): Promise<void> {
+        const events = readdirSync('src/events/');
 
-            client.on(eventName, Event.execute.bind(Event, client));
+        for (const files of events) {
+            const eventFile = await import(`../events/${files}`);
+            const Event = new eventFile.default(files.split('.')[0]);
+
+            client.on(files.split('.')[0], Event.execute.bind(events, client));
         }
     }
 
-    public static async loadCommands(client: BaseClient) {
-        const commands = readdirSync('src/commands');
-        for (const files of commands) {
-            const commandFile = await import(`../commands/${files}`);
-            const Command = new commandFile.default();
+    public static async loadCommands(client: BaseClient): Promise<void> {
+        const commands = readdirSync('src/commands/');
 
-            client.commands.set(Command.name, Command);
-            for (const alias of Command.aliases) {
-                client.aliases.set(alias, Command);
+        for (const folder of commands) {
+            const files = readdirSync(`src/commands/${folder}`);
+            for (const file of files) {
+                const commandFile = await import(`../commands/${folder}/${file}`);
+                const Command = new commandFile.default();
+
+                client.commands.set(Command.name, Command);
+                for (const alias of Command.aliases) {
+                    client.aliases.set(alias, Command);
+                }
             }
         }
     }

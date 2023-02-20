@@ -10,3 +10,21 @@ PREFIX=.
 ```
 
 * Se você fez corretamente, agora é só usar o comando `npm start` que o seu bot deverá ficar online.
+
+## 💡 Observações
+* O bot está configurado para usar um servidor ***lavalink*** público totalmente funcional, mas caso queira modificar para inserir o seu próprio, será necessário alterar o seguinte arquivo:
+```
+├── 📁 music-bot
+|  └── 📁 src
+|     └── 📁 structures
+|        └── 📄 BaseManager.ts
+```
+* Insira os campos abaixos de acordo com suas necessidades:
+```
+{
+    host: 'lava.link',
+    port: 80,
+    password: 'password',
+    secure: false
+}
+```
