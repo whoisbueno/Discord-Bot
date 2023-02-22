@@ -5,8 +5,8 @@ import { BaseCommand } from '../../structures/BaseCommand';
 export default class Skip extends BaseCommand {
     private constructor() {
         super({
-            name: 'skip',
-            aliases: ['next', 'n', 'sk']
+            name: 'playprevious',
+            aliases: ['previous', 'anterior']
         });
     }
 
@@ -22,19 +22,20 @@ export default class Skip extends BaseCommand {
         const { channel } = message.member?.voice as VoiceState;
         if (!channel) {
             return message.reply({ embeds: [{ description: `❌ Você precisa entrar em um canal de voz.`, color: Colors.Red }] });
+
         };
 
         if (channel.id !== player.voiceChannel) {
             return message.reply({ embeds: [{ description: `❌ Não estamos no mesmo canal de voz.`, color: Colors.Red }] });
         };
 
-        if (!player.queue.current) {
-            return message.reply('\`❌\`┃Não há nenhuma música tocando.');
+        if (!player.queue.previous) {
+            return message.reply({ embeds: [{ description: `❌ Não há nenhuma música tocada anteriormente.`, color: Colors.Red }] });
         };
 
-        const { title, uri } = player.queue.current;
-        player.stop();
+        const { title, uri } = player.queue.previous;
+        player.play(uri as any);
 
-        message.reply({ embeds: [{ description: `✅ [${title}](${uri}) foi trocada.`, color: Colors.Green }] });
+        message.reply({ embeds: [{ description: `🎶 [${title}](${uri}) tocando novamente.`, color: Colors.Green }] });
     }
 }

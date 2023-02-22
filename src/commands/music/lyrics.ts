@@ -17,7 +17,7 @@ export default class Lyrics extends BaseCommand {
         if (!args || args.length < 1) return;
 
         const lyrics = await lyricsFinder(args.join(' '), args.join(' '));
-        if (!lyrics) return message.reply('\`❌\`┃Não foi possível encontrar a letra desejada, tente novamente!');
+        if (!lyrics) message.reply({ embeds: [{ description: `❌ Não foi possível encontrar a letra desejada, tente novamente!`, color: Colors.Red }] });
 
         message.reply({ embeds: [{ description: `${lyrics}`, color: Colors.Blue }] });
     }
