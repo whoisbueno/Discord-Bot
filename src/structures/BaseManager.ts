@@ -17,7 +17,7 @@ export = (client: Client) => {
             if (guild) guild.shard.send(payload);
         }
     })
-        .on('nodeConnect', node => console.log(`[+] Lavalink conectado com sucesso.`))
+        .on('nodeConnect', () => console.log(`[+] Lavalink conectado com sucesso.`))
         .on('nodeError', (node, error) => console.log(`Node '${node.options.identifier}' encontrou um erro: ${error.message}.`))
         .on('trackStart', (player, track) => {
             const timestamp = track.duration / 1000;
@@ -32,7 +32,7 @@ export = (client: Client) => {
                 embeds:
                     [{
                         title: `✅ Tocando agora:`,
-                        description: `[${track.title}](${track.uri})\n[\`${formatted || 'LIVE'}\`]\n\nRequisitado por: ${(track.requester as any).toString()}`,
+                        description: `[${track.title}](${track.uri})\n[\`${formatted || 'LIVE'}\`]\n\nRequisitado por: ${(track.requester as never | string).toString()}`,
                         thumbnail: { url: track.thumbnail as string },
                         color: Colors.Green
                     }]
@@ -40,7 +40,7 @@ export = (client: Client) => {
         })
         .on('queueEnd', player => {
             const channel = client.channels.cache.get(player.textChannel as string) as TextChannel;
-            channel.send({ embeds: [{ description: `✅ Fim da playlist, saindo do canal de voz.`, color: Colors.Green }] });;
+            channel.send({ embeds: [{ description: `✅ Fim da playlist, saindo do canal de voz.`, color: Colors.Green }] });
             player.destroy();
         })
 }

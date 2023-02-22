@@ -24,17 +24,16 @@ export default class BassBoost extends BaseCommand {
         const player = client.manager.get(message.guild?.id);
         if (!player) {
             return message.reply({ embeds: [{ description: `❌ O servidor não possui nenhum player ativo.`, color: Colors.Red }] });
-        };
+        }
 
         const { channel } = message.member?.voice as VoiceState;
         if (!channel) {
             return message.reply({ embeds: [{ description: `❌ Você precisa entrar em um canal de voz.`, color: Colors.Red }] });
-
-        };
+        }
 
         if (channel.id !== player.voiceChannel) {
             return message.reply({ embeds: [{ description: `❌ Não estamos no mesmo canal de voz.`, color: Colors.Red }] });
-        };
+        }
 
         let level = "none";
         if (args.length && args[0].toLowerCase() in levels) level = args[0].toLowerCase();
@@ -42,7 +41,7 @@ export default class BassBoost extends BaseCommand {
         const bands = new Array(3)
             .fill(null)
             .map((_, i) =>
-                ({ band: i, gain: (levels as any)[level] })
+                ({ band: i, gain: (levels as never)[level] })
             );
 
         player.setEQ(...bands);

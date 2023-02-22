@@ -17,5 +17,5 @@ export default class MessageCreate extends BaseEvent {
             console.log(`An error has ocurred at command ${command}`);
             console.error((e as Error).stack);
         }
-    };
+    }
 }

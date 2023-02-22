@@ -16,15 +16,14 @@ export default class Status extends BaseCommand {
         if (!message.guild?.members.me?.permissionsIn(message.channelId).has('SendMessages')) return; if (!message.guild?.members.me?.permissions.has('SendMessages')) return;
 
         function ram() {
-            let raminfo;
             try {
                 const used = readFileSync(`/sys/fs/cgroup/memory/memory.usage_in_bytes`).toString();
                 const total = readFileSync(`/sys/fs/cgroup/memory/memory.limit_in_bytes`).toString();
-                return raminfo = `${~~(used as any / 1024 / 1024)}/${~~(total as any / 1024 / 1024)}MB`;
+                return  `${~~(used as never / 1024 / 1024)}/${~~(total as never / 1024 / 1024)}MB`;
             } catch {
-                return raminfo = `${~~(totalmem() / 1024 / 1024 - freemem() / 1024 / 1024)}/${~~(totalmem() / 1024 / 1024)}MB`;
+                return `${~~(totalmem() / 1024 / 1024 - freemem() / 1024 / 1024)}/${~~(totalmem() / 1024 / 1024)}MB`;
             }
-        };
+        }
 
         message.reply({
             embeds: [{

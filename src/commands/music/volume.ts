@@ -17,16 +17,16 @@ export default class Volume extends BaseCommand {
         const player = client.manager.get(message.guild?.id);
         if (!player) {
             return message.reply({ embeds: [{ description: `❌ O servidor não possui nenhum player ativo.`, color: Colors.Red }] });
-        };
+        }
 
         const { channel } = message.member?.voice as VoiceState;
         if (!channel) {
             return message.reply({ embeds: [{ description: `❌ Você precisa entrar em um canal de voz.`, color: Colors.Red }] });
-        };
+        }
 
         if (channel.id !== player.voiceChannel) {
             return message.reply({ embeds: [{ description: `❌ Não estamos no mesmo canal de voz.`, color: Colors.Red }] });
-        };
+        }
 
         const volume = Number(args[0]);
         if (!volume || volume < 1 || volume > 300) {

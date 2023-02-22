@@ -19,23 +19,23 @@ export default class Play extends BaseCommand {
 
         if (!message.member?.voice.channel) {
             return message.reply({ embeds: [{ description: `❌ Você precisa estar em um canal de voz para usar esse comando!`, color: Colors.Red }] });
-        };
+        }
 
         if (message.guild?.members.me?.voice.channel && message.guild?.members.me?.voice.channel.id !== message.member.voice.channel.id) {
             return message.reply({ embeds: [{ description: `❌ Estou conectado em outro canal nesse momnento!`, color: Colors.Red }] });
-        };
+        }
 
         const search = args.join(' ');
         if (!search) {
             return message.reply({ embeds: [{ description: `❌ Você precisa inserir um **nome** ou **link** válido!`, color: Colors.Red }] });
-        };
+        }
 
         let res;
         const player = client.manager.create({
             guild: message.guild?.id as string,
             voiceChannel: message.member.voice.channel.id,
             textChannel: message.channel.id
-        })
+        });
 
         try {
             res = await client.manager.search(search, message.author);
@@ -43,14 +43,14 @@ export default class Play extends BaseCommand {
             if (res.loadType === 'LOAD_FAILED') {
                 if (!player.queue.current) player.destroy();
                 throw res.exception;
-            };
+            }
         } catch (err) {
             if (err instanceof Error) return message.reply({ embeds: [{ description: `❌ Ocorreu um erro: \`${err.message}\``, color: Colors.Red }] })
         }
 
         if (!res?.tracks?.[0]) {
             return message.reply({ embeds: [{ description: `❌ Não encontrei resultados!`, color: Colors.Red }] });
-        };
+        }
 
         if (player.state !== 'CONNECTED') player.connect();
 
@@ -62,7 +62,7 @@ export default class Play extends BaseCommand {
             player.queue.add(res?.tracks[0]);
             if (!player.playing && !player.paused) player.play();
             message.reply({ embeds: [{ description: `🎶 [${res.tracks[0].title}](${res.tracks[0].uri}) adicionado à fila.`, color: Colors.Green }] });
-        };
+        }
 
     }
 }
