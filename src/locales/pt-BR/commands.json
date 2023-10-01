@@ -1,0 +1,5 @@
+{
+  "ping": {
+    "desc": "meu ping é de {{ping}}ms"
+  }
+}
