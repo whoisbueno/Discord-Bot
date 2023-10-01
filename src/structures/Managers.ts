@@ -1,8 +1,8 @@
-import { BaseClient } from './BaseClient';
+import { Client } from '@structures/Client';
 import { readdirSync } from 'fs';
 
-export class BaseLoader {
-    public static async loadEvents(client: BaseClient): Promise<void> {
+export class Manager {
+    public static async loadEvents(client: Client): Promise<void> {
         const events = readdirSync('src/events/');
 
         for (const files of events) {
@@ -13,7 +13,7 @@ export class BaseLoader {
         }
     }
 
-    public static async loadCommands(client: BaseClient): Promise<void> {
+    public static async loadCommands(client: Client): Promise<void> {
         const commands = readdirSync('src/commands/');
 
         for (const folder of commands) {

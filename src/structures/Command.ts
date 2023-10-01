@@ -5,7 +5,7 @@ interface ICommand {
     aliases: string[],
 }
 
-export abstract class BaseCommand {
+export abstract class Command {
     public readonly name: string;
     public readonly aliases: string[]
 
